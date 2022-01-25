@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Attach to sam cli",
+            "port": 9999,
+            "type": "pwa-node",
+            "request": "attach",
+            "address": "localhost",
+            "localRoot": "${workspaceRoot}/cdk.out/asset.f0c98ecd9aad7b29364028110363401ad1f858a6f8f212c9ca63d3705dbabfca",
+            "remoteRoot": "/var/task",
+            "protocol": "inspector",
+            "stopOnEntry": false
+        }
+        
+    ]
+}

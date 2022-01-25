@@ -1,4 +1,4 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { CfnParameter, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { SqsEventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
@@ -11,6 +11,11 @@ export class SamCdkStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
+    const environmentType = new CfnParameter(this, "environmentType", {
+      type: "String",
+      default: "Prod"
+    });
+
     const queue = new Queue(this, 'Queue', {
     queueName: 'sam-cdk-queue' 
     });
@@ -20,6 +25,7 @@ export class SamCdkStack extends Stack {
       entry: './src/router.ts',
       handler: 'handler',
       environment: {
+        "environmentType": environmentType.valueAsString
       },
     });
 
